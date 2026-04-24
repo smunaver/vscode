@@ -1,0 +1,15 @@
+Step 1: Kill ALL VS Code processes
+
+Run this in PowerShell (Admin):
+
+taskkill /F /IM code.exe /T
+taskkill /F /IM Code.exe /T
+
+Also kill any leftover node processes (important):
+
+taskkill /F /IM node.exe /T
+🔥 Step 2: Take ownership (fix permission issues)
+takeown /F "$env:USERPROFILE\.vscode" /R /D Y
+icacls "$env:USERPROFILE\.vscode" /grant "$env:USERNAME:F" /T
+🔥 Step 3: Now delete (should work)
+Remove-Item "$env:USERPROFILE\.vscode\extensions" -Recurse -Force
